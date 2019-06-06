@@ -1,0 +1,49 @@
+﻿@model IEnumerable<UniversityDemo.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Courses</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="container">
+    <div class="row">
+
+
+        @using (Html.BeginForm("Index", "Courses", FormMethod.Get))
+        {
+            <p>
+                @Html.TextBox("searching")
+                <button class="btn-info" type="submit">Search</button>
+            </p>
+
+        }
+
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CourseId },new{ @class = "btn btn-success" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.CourseId }, new { onclick = $"return confirm('{item.CourseName} will be deleted. Are you sure ?');", @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

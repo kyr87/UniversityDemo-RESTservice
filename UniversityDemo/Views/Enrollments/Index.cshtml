@@ -1,0 +1,73 @@
+﻿@model IEnumerable<UniversityDemo.Models.Enrollment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Enrollments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="container">
+    <div class="row">
+
+
+        @using (Html.BeginForm("Index", "Enrollments", FormMethod.Get))
+        {
+            <p>
+                @Html.TextBox("searching")
+                <button class="btn-info" type="submit">Search</button>
+            </p>
+
+        }
+
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.CourseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.UserRole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teacher.UserName)
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.Teacher.UserRole)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.UserRole)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teacher.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teacher.UserRole)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EnrollmentId }, new { @class = "btn btn-success" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.EnrollmentId }, new { onclick = $"return confirm('This enrollment will be deleted. Are you sure ?');", @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
