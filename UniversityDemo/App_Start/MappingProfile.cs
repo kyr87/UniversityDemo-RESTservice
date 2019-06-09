@@ -13,13 +13,16 @@ namespace UniversityDemo.App_Start
         public MappingProfile()
         {
             Mapper.CreateMap<User, UserDto>();
-            Mapper.CreateMap<UserDto, User>();
+            Mapper.CreateMap<UserDto, User>()
+                .ForMember(m => m.UserId,opt => opt.Ignore());
 
             Mapper.CreateMap<Course, CourseDto>();
-            Mapper.CreateMap<CourseDto, Course>();
+            Mapper.CreateMap<CourseDto, Course>()
+                .ForMember(m => m.CourseId, opt => opt.Ignore());
 
             Mapper.CreateMap<Enrollment, EnrollmentDto>();
-            Mapper.CreateMap<EnrollmentDto, Enrollment>();
+            Mapper.CreateMap<EnrollmentDto, Enrollment>()
+                .ForMember(m => m.EnrollmentId, opt => opt.Ignore());
         }
     }
 }
