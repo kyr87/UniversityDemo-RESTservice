@@ -10,8 +10,11 @@ namespace UniversityDemo.Dtos
     public class UserDto
     {
         public int UserId { get; set; }  
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public Role UserRole { get; set; }
     }
 }

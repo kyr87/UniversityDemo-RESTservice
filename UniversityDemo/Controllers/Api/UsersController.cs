@@ -45,7 +45,7 @@ namespace UniversityDemo.Controllers.Api
         public IHttpActionResult CreateUser(UserDto userDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Model is not valid. Check again!!!");
 
             var user = Mapper.Map<UserDto, User>(userDto);
             _context.Users.Add(user);
@@ -60,7 +60,7 @@ namespace UniversityDemo.Controllers.Api
         public IHttpActionResult UpdateUser(int id, UserDto userDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Model is not valid. Check again!!!");
 
             var userInDb = _context.Users.SingleOrDefault(c => c.UserId == id);
 
@@ -71,7 +71,7 @@ namespace UniversityDemo.Controllers.Api
 
             _context.SaveChanges();
 
-            return Ok();
+            return Ok($"{userInDb.UserName} updated successfully");
         }
 
         // DELETE /api/users/1
@@ -93,7 +93,7 @@ namespace UniversityDemo.Controllers.Api
             _context.Users.Remove(userInDb);
             _context.SaveChanges();
 
-            return Ok();
+            return Ok($"{userInDb.UserName} deleted successfully");
         }
     }
 }

@@ -9,6 +9,7 @@ namespace UniversityDemo.Dtos
     public class CourseDto
     {
         public int CourseId { get; set; }
+        [Required]
         public string CourseName { get; set; }
     }
 }

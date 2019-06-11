@@ -45,7 +45,7 @@ namespace UniversityDemo.Controllers.Api
         public IHttpActionResult CreateCourse(CourseDto courseDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Model is not valid. Check again!!!");
 
             var course = Mapper.Map<CourseDto, Course>(courseDto);
             _context.Courses.Add(course);
@@ -60,7 +60,7 @@ namespace UniversityDemo.Controllers.Api
         public IHttpActionResult UpdateCourse(int id, CourseDto courseDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Model is not valid. Check again!!!");
 
             var courseInDb = _context.Courses.SingleOrDefault(c => c.CourseId == id);
 
@@ -71,7 +71,7 @@ namespace UniversityDemo.Controllers.Api
 
             _context.SaveChanges();
 
-            return Ok();
+            return Ok($"{courseInDb.CourseName} updated successfully");
         }
 
         // DELETE /api/courses/1
@@ -86,7 +86,7 @@ namespace UniversityDemo.Controllers.Api
             _context.Courses.Remove(courseInDb);
             _context.SaveChanges();
 
-            return Ok();
+            return Ok($"{courseInDb.CourseName} deleted successfully");
         }
     }
 }

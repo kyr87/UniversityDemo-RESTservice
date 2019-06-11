@@ -45,7 +45,7 @@ namespace UniversityDemo.Controllers.Api
         public IHttpActionResult CreateEnrollment(EnrollmentDto enrollmentDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Model is not valid. Check again!!!");
 
             var enrollment = Mapper.Map<EnrollmentDto, Enrollment>(enrollmentDto);
             _context.Enrollments.Add(enrollment);
@@ -60,7 +60,7 @@ namespace UniversityDemo.Controllers.Api
         public IHttpActionResult UpdateEnrollment(int id, EnrollmentDto enrollmentDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Model is not valid. Check again!!!");
 
             var enrollmentInDb = _context.Enrollments.SingleOrDefault(c => c.EnrollmentId == id);
 
@@ -71,7 +71,7 @@ namespace UniversityDemo.Controllers.Api
 
             _context.SaveChanges();
 
-            return Ok();
+            return Ok("Enrollment updated successfully");
         }
 
         // DELETE /api/enrollments/1
@@ -86,7 +86,7 @@ namespace UniversityDemo.Controllers.Api
             _context.Enrollments.Remove(enrollmentInDb);
             _context.SaveChanges();
 
-            return Ok();
+            return Ok("Enrollment deleted successfully");
         }
     }
 }
